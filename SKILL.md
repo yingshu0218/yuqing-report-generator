@@ -338,23 +338,31 @@ tags:
 | 参考文章标题 | 仿宋 / 仿宋_GB2312 | 四号（14pt） | 左对齐 |
 | 参考链接 URL | 仿宋 / 仿宋_GB2312 | 小四（12pt） | 左对齐，首行缩进 2 字符 |
 
-关键技术要点：
-- 使用 `python-docx` 库生成 DOCX
-- 字体设置：标题 `SimHei`（黑体），正文尝试 `FangSong` 或 `仿宋_GB2312`（降级：`仿宋`）
-- 首行缩进：`paragraph_format.first_line_indent = Cm(0.74)`（约等于 2 个四号字符宽度）
-- 行距：`paragraph_format.line_spacing = 1.0`（单倍行距）
+关键技术要点（使用 Node.js `docx` 库）：
+- 使用 Node.js `docx` 库生成 DOCX（python-docx 的 lxml 依赖在沙箱环境存在签名兼容问题）
+- 字体设置：`font: "SimHei"`（标题黑体），`font: "FangSong"`（正文仿宋）
+- 字号对照（OOXML 半磅单位，1pt = 2 半磅）：
+  - 小三 15pt → `size: 30`
+  - 四号 14pt → `size: 28`
+  - 小四 12pt → `size: 24`
+  - 五号 10.5pt → `size: 21`
+- 首行缩进：`indent: { firstLine: 560 }`（2字符 × 14pt × 20 = 560 twips）
+- 行距：`spacing: { line: 280 }`（14pt × 20 = 280 twips = 单倍行距）
+- 段前段后：`spacing: { before: 120, after: 120 }`（约0.5行）
+- 对齐：`alignment: AlignmentType.CENTER`（标题/来源行居中），
+  `AlignmentType.JUSTIFIED`（正文两端对齐）
 - 参考链接区域的 `## N. ` 标记（Markdown heading 语法）在 DOCX 中转换为普通文本格式
 - 生成后使用 `deliver_attachments` 将两份文件交付用户
 
 信源说明文档排版格式：
-- 标题（一级）：黑体，小三，居中
-- 二级标题（如"一、报告概览"）：黑体，四号，左对齐
-- 正文：仿宋，四号，首行缩进 2 字符
-- 表格：仿宋，五号（10.5pt），表头加粗
+- 标题（一级）：黑体，小三(15pt)，居中
+- 二级标题（如"一、报告概览"）：黑体，四号(14pt)，左对齐
+- 正文：仿宋，四号(14pt)，首行缩进 2 字符，单倍行距
+- 表格：仿宋，五号(10.5pt)，表头加粗
 
 ##### 生成流程
 
-1. 确保 `python-docx` 可用（如未安装则自动安装至沙箱环境）
+1. 确保 Node.js `docx` 库可用（沙箱环境已预装）
 2. 将已生成的舆情报告内容和信源说明内容按上述格式写入 DOCX
 3. 使用 `deliver_attachments` 交付两份文件
 4. 提示用户文件已交付
