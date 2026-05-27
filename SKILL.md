@@ -6,7 +6,7 @@ description: >
   生成两份配套文档：一份是面向读者的舆情分析报告（含参考链接），
   一份是面向使用者的信源与数据解读说明文档。如未指定话题，则列
   出近期热门舆情事件供选择。
-version: "1.3.1"
+version: "1.3.2"
 author: yingshu0218
 tags:
   - 舆情
@@ -173,26 +173,64 @@ tags:
 
 **④ 参考文章及链接**
 - 与正文之间空一行
-- 严格采用以下格式：
+- 严格采用以下格式（每条三行：序号标题 + URL + 来源站点名称）：
 
 ```
 参考文章及链接：
 
 ## 1. [文章完整标题]
 [URL]
+来源：[站点名称]
 
 ## 2. [文章完整标题]
 [URL]
+来源：[站点名称]
 ```
 
 - 至少 2 条，一般 2-5 条
 - 文章标题保留原文标点、括号注释、英文符号
 - URL 单独成行，**不使用** Markdown 链接语法 `[标题](url)`，
   就是裸 URL
+- **来源站点名称**紧接 URL 下一行，格式为 `来源：[站点名称]`，
+  站点名称根据 URL 域名自动匹配（见下方域名映射表）
 - 链接对应的文章必须是检索时真实读取过的来源
 - **所有链接必须指向官方权威媒体平台**（人民网、新华网、央视网、
   澎湃新闻官网等 P1/P2 级别媒体主站），严禁链接到自媒体平台
   （如今日头条、百家号、搜狐号等）的文章页面
+
+**域名 → 站点名称映射表**：
+
+| URL 域名特征 | 站点名称 |
+|-------------|---------|
+| people.com.cn | 人民网 |
+| xinhuanet.com | 新华网 |
+| cctv.com / cctvnews.cn | 央视新闻 |
+| gmw.cn | 光明网 |
+| chinanews.com | 中国新闻网 |
+| thepaper.cn | 澎湃新闻 |
+| caixin.com | 财新网 |
+| yicai.com | 第一财经 |
+| bjnews.com.cn | 新京报 |
+| bjd.com.cn / beijingdaily.com.cn | 北京日报 |
+| chinadaily.com.cn | 中国日报 |
+| huanqiu.com | 环球网 |
+| ce.cn /中国经济网 | 中国经济网 |
+| youth.cn | 中国青年网 |
+| legaldaily.com.cn | 法治日报 |
+| jfdaily.com | 解放日报 |
+| nfdaily.cn / southcn.com | 南方日报 |
+| rednet.cn | 红星新闻 |
+| jiemian.com | 界面新闻 |
+| 36kr.com | 36氪 |
+| huxiu.com | 虎嗅 |
+| jkb.com.cn | 健康时报 |
+| taiwan.cn | 中国台湾网 |
+| taihainet.com | 台海网 |
+| crntt.com | 中评社 |
+| takungpao.com.hk | 大公报 |
+| wenweipo.com | 文汇网 |
+| toutiao.com | 今日头条 |
+| 其他域名 | 根据实际域名提取主站名 |
 
 #### 写作风格规范
 
