@@ -1,12 +1,12 @@
 # 舆情分析报告生成器 (Yuqing Report Generator)
 
-> 面向通用 AI Agent 的专业舆情分析报告生成 Skill
+> 专业舆情分析报告生成 Skill for WorkBuddy / Claw
 
 ## 简介
 
 专为**舆情监测与分析**场景设计的 AI Skill，充当资深舆情分析师。
 
-输入话题关键词，自动检索权威媒体信息源（S 级官方媒体 / A 级权威商业媒体），输出一篇**符合官方媒体风格的舆情分析报告** + **信源与数据解读说明**。
+输入话题关键词，自动检索权威媒体信息源（P1 官方媒体 / P2 主流商业媒体），输出一篇**符合官方媒体风格的舆情分析报告** + **信息来源分析文档**。
 
 若未指定话题，自动列出近期具有舆情讨论度的热门新闻标题，供用户选择后生成报告。
 
@@ -14,7 +14,7 @@
 
 ## 版本
 
-**v1.4.2** — 当前版本
+**v1.2.0** — 当前版本
 
 ## 功能特性
 
@@ -26,8 +26,9 @@
 - ✅ **热门话题发现**：无指定话题时自动发现近7天热门舆情供选择
 - ✅ **满意度确认**：生成后预览确认，支持按反馈多轮调整
 - ✅ **多格式导出**：
-  - **Markdown**：默认导出两份 `.md` 文件，内容与预览一致
   - **DOCX**：符合标准公文排版（标题黑体小三/正文仿宋四号/首行缩进2字符/单倍行距）
+  - **腾讯文档**：一键创建在线智能文档
+  - **金山文档**：一键创建在线文档
 
 ---
 
@@ -68,37 +69,23 @@
 
 ## 安装方式
 
-本仓库可作为通用 Skill 仓库安装。支持仓库安装的 Agent，可直接选择或填写本仓库地址：
-
-```
-https://github.com/yingshu0218/yuqing-report-generator
-```
-
-### Codex 安装
-
-```bash
-git clone https://github.com/yingshu0218/yuqing-report-generator.git ~/.codex/skills/yuqing-report-generator
-```
-
-或在 Codex 支持从 GitHub 安装 skill 的界面中，直接选择本仓库。
-
-### WorkBuddy 安装
+### 方式一：通过 WorkBuddy 安装（推荐）
 
 ```bash
 git clone https://github.com/yingshu0218/yuqing-report-generator.git ~/.workbuddy/skills/yuqing-report-generator
 ```
 
-### Claw 安装
-
-在 Claw 平台添加 skill，指向本仓库 GitHub 地址。
-
-### 手动安装
+### 方式二：手动复制
 
 将 `SKILL.md` 复制到 skills 目录：
 
 ```
-<agent-skills-dir>/yuqing-report-generator/SKILL.md
+~/.workbuddy/skills/yuqing-report-generator/SKILL.md
 ```
+
+### 方式三：通过 Claw 安装
+
+在 Claw 平台添加 skill，指向本仓库 GitHub 地址。
 
 ---
 
@@ -124,6 +111,9 @@ git clone https://github.com/yingshu0218/yuqing-report-generator.git ~/.workbudd
 ```
 满意 → 导出为 DOCX
 ```
+```
+满意 → 导出到腾讯文档
+```
 
 ---
 
@@ -136,21 +126,6 @@ git clone https://github.com/yingshu0218/yuqing-report-generator.git ~/.workbudd
 | P2 | 媒体社交平台官号 | 人民日报微博、央视新闻微信 |
 | P2 | 专业垂直媒体 | 界面新闻、36氪、虎嗅 |
 | ❌ 禁止 | 匿名信源、无署名自媒体 | — |
-
----
-
-## 版本归档
-
-后续每次更新前，请将旧版本文档归档到 `archive/` 目录。建议命名格式：
-
-```
-archive/README_v[版本号].md
-archive/SKILL_v[版本号].md
-```
-
-当前仓库已归档旧版 README：
-
-- `archive/README_v1.2.0.md`
 
 ---
 
