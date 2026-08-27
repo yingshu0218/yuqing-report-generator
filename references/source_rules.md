@@ -1,5 +1,7 @@
 # 信源规则与域名映射
 
+> 版本：v1.6.0
+
 本文件用于舆情报告生成过程中的信息检索、信源筛选、链接核验和站点
 名称映射。开始检索、筛选来源、生成参考链接前必须读取。
 
@@ -63,27 +65,41 @@ A 级账户核验清单：
 |------|------|
 | 互联网公司开办的新闻/资讯平台 | 网易新闻、腾讯新闻、新浪新闻、搜狐新闻 |
 
-B 级账户核验清单：
+B 级账户核验步骤（按顺序执行，任一环节不通过即放弃该条来源）：
 
-| 检查项 | 通过条件 | 不通过处理 |
-|--------|----------|------------|
-| 发布者身份 | 显示为官方媒体机构名称 | 禁止引用 |
-| 认证标识 | 有“官方”“认证”等标识 | 无标识时优先放弃 |
-| 文章出处 | 标注来源为官方媒体 | 禁止引用或追溯首发 |
-| 原始链接 | 可追溯到官方媒体首发链接 | 标注为转述，降权使用 |
+1. 查看页面是否标注来源媒体，确认发布者为官方媒体机构名称，而非平台编辑、自媒体入驻作者或聚合号。
+2. 查看是否有“官方”“认证”等标识；无标识时优先放弃。
+3. 若页面标注“转载自 XX”，须追溯至该媒体的首发原文链接。
+4. 追溯到的首发原文若为 S/A 级域名，则以首发原文为准；无法追溯时标注为“转述”，降权使用。
 
 核验通过的 B 级来源，在文档二中标注为“B 级（官方媒体账户转载）”。
+
+### 微信公众号规则
+
+`mp.weixin.qq.com` 文章按发布主体分级处理：
+
+| 发布主体 | 处理方式 |
+|----------|----------|
+| 官方媒体认证公众号（人民日报、新华社、央视新闻等媒体官方账号） | 可引用，视为 S 级/A 级对应媒体来源，文档二标注“公众号原文” |
+| 政府机构认证公众号（中国政府网、各部委官方号等） | 可引用，视为 S 级，文档二标注“公众号原文” |
+| 非认证媒体公众号、个人号、营销号 | 禁止作为事实来源；如内容确为媒体首发，追溯至媒体官网原文 |
+
+引用公众号文章时，应优先核对同篇内容在媒体官网或新闻客户端的正式
+发布版本；公众号链接仅作为补充入口使用。
 
 ## 直接接受域名
 
 ### S 级与 A 级
 
 - 央媒：`people.com.cn`、`xinhuanet.com`、`cctv.com`、`cctvnews.cn`、
-  `gmw.cn`、`chinadaily.com.cn`、`chinanews.com`、`youth.cn`、`ce.cn`
+  `gmw.cn`、`chinadaily.com.cn`、`chinanews.com`、`youth.cn`、`ce.cn`、
+  `cnr.cn`、`china.com.cn`、`cri.cn`
 - 政府：`gov.cn` 及所有 `.gov.cn` 结尾域名
 - 党报与地方媒体：`bjd.com.cn`、`beijingdaily.com.cn`、`jfdaily.com`、
-  `nfdaily.cn`、`southcn.com`、`bjnews.com.cn`
-- 商业媒体官网：`thepaper.cn`、`caixin.com`、`yicai.com`、`jiemian.com`
+  `nfdaily.cn`、`southcn.com`、`bjnews.com.cn`、`zjol.com.cn`、
+  `xhby.net`、`dzwww.com`
+- 商业媒体官网：`thepaper.cn`、`caixin.com`、`yicai.com`、`jiemian.com`、
+  `stcn.com`、`21jingji.com`
 - 专业垂直媒体：`legaldaily.com.cn`、`jkb.com.cn`、`36kr.com`、`huxiu.com`
 - 港澳台相关权威媒体：`taiwan.cn`、`taihainet.com`、`crntt.com`、
   `takungpao.com.hk`、`wenweipo.com`
@@ -101,7 +117,7 @@ B 级账户核验清单：
 - `baijiahao.baidu.com`
 - `sohu.com/a/` 等搜狐号自媒体路径
 - `163.com/dy/` 等网易号自媒体路径
-- `mp.weixin.qq.com` 中的非认证媒体公众号
+- `mp.weixin.qq.com` 中的非认证媒体公众号（认证媒体公众号按上文“微信公众号规则”处理）
 - 任何含 `author`、`column`、`blog` 等个人作者或专栏路径的页面
 - 匿名信源、营销号、内容农场、无出处截图或二手转述
 
@@ -122,7 +138,8 @@ B 级账户核验清单：
 - 仅作为舆论倾向呈现，不得作为事实依据。
 - 引用方式为带引号短句。
 - 应优先概括真实评论的共同表达，保留原意，可适度整理用词。
-- 文档二必须标注采样平台、话题/词条、是否高赞或热门。
+- 采样时间原则上须在近 7 天内；超出时须在文档二注明并评估时效性。
+- 文档二必须标注采样平台、话题/词条、采样时间、是否高赞或热门。
 
 ## 域名到站点名称映射
 
@@ -136,15 +153,23 @@ B 级账户核验清单：
 | `chinadaily.com.cn` | 中国日报 |
 | `ce.cn` | 中国经济网 |
 | `youth.cn` | 中国青年网 |
+| `cnr.cn` | 央广网 |
+| `china.com.cn` | 中国网 |
+| `cri.cn` | 国际在线 |
 | `gov.cn` / `.gov.cn` | 政府官网 |
 | `thepaper.cn` | 澎湃新闻 |
 | `caixin.com` | 财新网 |
 | `yicai.com` | 第一财经 |
 | `jiemian.com` | 界面新闻 |
+| `stcn.com` | 证券时报 |
+| `21jingji.com` | 21世纪经济报道 |
 | `bjnews.com.cn` | 新京报 |
 | `bjd.com.cn` / `beijingdaily.com.cn` | 北京日报 |
 | `jfdaily.com` | 解放日报 |
 | `nfdaily.cn` / `southcn.com` | 南方日报 |
+| `zjol.com.cn` | 浙江在线 / 潮新闻 |
+| `xhby.net` | 新华日报 / 交汇点 |
+| `dzwww.com` | 大众网 |
 | `legaldaily.com.cn` | 法治日报 |
 | `jkb.com.cn` | 健康时报 |
 | `36kr.com` | 36氪 |
